@@ -8,4 +8,7 @@
     <string name="title_huntcast">HuntCast</string>
     <string name="title_map">Map</string>
     <string name="title_me">Me</string>
+    <string name="title_activity_hunt_cast_main">HuntCastMain</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>
