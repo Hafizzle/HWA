@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">HuntWiseApp</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_gear">Gear</string>
+    <string name="title_logs">Logs</string>
+    <string name="title_huntcast">HuntCast</string>
+    <string name="title_map">Map</string>
+    <string name="title_me">Me</string>
+</resources>
