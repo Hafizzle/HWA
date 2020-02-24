@@ -14,9 +14,20 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.hafizzle.huntwiseapp.Fragments.BlackBearFragment;
+import com.hafizzle.huntwiseapp.Fragments.BlacktailDeerFragment;
+import com.hafizzle.huntwiseapp.Fragments.CoyoteFragment;
+import com.hafizzle.huntwiseapp.Fragments.ElkFragment;
+import com.hafizzle.huntwiseapp.Fragments.MooseFragment;
+import com.hafizzle.huntwiseapp.Fragments.MuleDeerFragment;
+import com.hafizzle.huntwiseapp.Fragments.RabbitFragment;
+import com.hafizzle.huntwiseapp.Fragments.SquirrelFragment;
+import com.hafizzle.huntwiseapp.Fragments.TurkeyFragment;
+import com.hafizzle.huntwiseapp.Fragments.UplandGameFragment;
 import com.hafizzle.huntwiseapp.Fragments.ViewPagerAdapter;
 import com.hafizzle.huntwiseapp.Fragments.WaterfowlFragment;
 import com.hafizzle.huntwiseapp.Fragments.WhitetailDeerFragment;
+import com.hafizzle.huntwiseapp.Fragments.WildBoarFragment;
 import com.hafizzle.huntwiseapp.R;
 
 public class HuntCast extends AppCompatActivity {
@@ -72,6 +83,17 @@ public class HuntCast extends AppCompatActivity {
         //Add Fragments here
         adapter.AddFragment(new WhitetailDeerFragment(), "Whitetail Deer");
         adapter.AddFragment(new WaterfowlFragment(), "Waterfowl");
+        adapter.AddFragment(new TurkeyFragment(), "Turkey");
+        adapter.AddFragment(new CoyoteFragment(), "Coyote");
+        adapter.AddFragment(new UplandGameFragment(), "Upland Game");
+        adapter.AddFragment(new WildBoarFragment(), "Wild Boar");
+        adapter.AddFragment(new RabbitFragment(), "Rabbit");
+        adapter.AddFragment(new SquirrelFragment(), "Squirrel");
+        adapter.AddFragment(new BlackBearFragment(), "Black Bear");
+        adapter.AddFragment(new ElkFragment(), "Elk");
+        adapter.AddFragment(new MooseFragment(), "Moose");
+        adapter.AddFragment(new MuleDeerFragment(), "Mule Deer");
+        adapter.AddFragment(new BlacktailDeerFragment(), "Blacktail Deer");
 
         //Adapter setup
         viewPager.setAdapter(adapter);
