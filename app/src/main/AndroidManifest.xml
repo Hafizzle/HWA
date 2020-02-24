@@ -12,10 +12,6 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".Activities.HuntCastMain"
-            android:label="@string/title_activity_hunt_cast_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
             android:name=".Activities.HuntCast"
             android:label="@string/app_name">
             <intent-filter>
