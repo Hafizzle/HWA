@@ -63,6 +63,7 @@ public class WhitetailDeerFragment extends Fragment {
                 Log.v("TAG", throwable.getMessage());
             }
         });
+
         return view;
 
     }
@@ -71,7 +72,7 @@ public class WhitetailDeerFragment extends Fragment {
         for (int i=0;i<=8;i++){
             mDates.add(threeHourForecast.getList().get(i).getDt().toString());
             mMinTemps.add(String.valueOf(threeHourForecast.getList().get(i).getMain().getTempMin()));
-            mMaxTemps.add(String.valueOf(threeHourForecast.getList().get(0).getMain().getTempMax()));
+            mMaxTemps.add(String.valueOf(threeHourForecast.getList().get(i).getMain().getTempMax()));
         }
     }
 

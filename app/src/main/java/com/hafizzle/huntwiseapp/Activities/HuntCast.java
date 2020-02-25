@@ -1,10 +1,14 @@
 package com.hafizzle.huntwiseapp.Activities;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +18,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
@@ -41,10 +47,11 @@ import com.kwabenaberko.openweathermaplib.models.threehourforecast.ThreeHourFore
 import java.util.ArrayList;
 
 public class HuntCast extends AppCompatActivity {
-
+    private static final int ERROR_DIALOG_REQUEST = 9001;
     private TabLayout tabLayout;
     private AppBarLayout appBarLayout;
     private ViewPager viewPager;
+
     //private ArrayList<String> mDates = new ArrayList<>();
     //private ArrayList<String> mMinTemps = new ArrayList<>();
     //private ArrayList<String> mMaxTemps = new ArrayList<>();
@@ -68,7 +75,12 @@ public class HuntCast extends AppCompatActivity {
                     break;
                 case R.id.navigation_map:
                     Intent intent2 = new Intent(HuntCast.this, Map.class);
-                    startActivity(intent2);
+                    if (isServicesOK()){
+                        startActivity(intent2);
+                    }else{
+                        break;
+                    }
+                    break;
                 case R.id.navigation_me:
                     Intent intent3 = new Intent(HuntCast.this, Me.class);
                     startActivity(intent3);
@@ -164,4 +176,21 @@ public class HuntCast extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
     */
+
+    public boolean isServicesOK(){
+        Log.d("TAG", "isServicesOK: checking google services version");
+
+        int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(HuntCast.this);
+        if(available == ConnectionResult.SUCCESS){
+            return true;
+        }
+        else if(GoogleApiAvailability.getInstance().isUserResolvableError(available)){
+            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(HuntCast.this, available, ERROR_DIALOG_REQUEST);
+            dialog.show();
+        }else {
+            Toast.makeText(this, "Unable to make map requests", Toast.LENGTH_SHORT).show();
+        }
+        return false;
+    }
+
 }
