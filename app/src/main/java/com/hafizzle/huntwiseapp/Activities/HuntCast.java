@@ -45,9 +45,9 @@ public class HuntCast extends AppCompatActivity {
     private TabLayout tabLayout;
     private AppBarLayout appBarLayout;
     private ViewPager viewPager;
-    private ArrayList<String> mDates = new ArrayList<>();
-    private ArrayList<String> mMinTemps = new ArrayList<>();
-    private ArrayList<String> mMaxTemps = new ArrayList<>();
+    //private ArrayList<String> mDates = new ArrayList<>();
+    //private ArrayList<String> mMinTemps = new ArrayList<>();
+    //private ArrayList<String> mMaxTemps = new ArrayList<>();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -113,6 +113,7 @@ public class HuntCast extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
 
+        /*
         //OpenWeatherMap
         OpenWeatherMapHelper helper = new OpenWeatherMapHelper(getString(R.string.OPEN_WEATHER_MAP_API_KEY));
         helper.setUnits(Units.IMPERIAL);
@@ -140,10 +141,14 @@ public class HuntCast extends AppCompatActivity {
                 Log.v("TAG", throwable.getMessage());
             }
         });
+        */
 
 
     }
 
+
+
+    /*
     public void getForecasts(ThreeHourForecast threeHourForecast){
         for (int i=0;i<=8;i++){
             mDates.add(threeHourForecast.getList().get(i).getDt().toString());
@@ -158,4 +163,5 @@ public class HuntCast extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
+    */
 }
