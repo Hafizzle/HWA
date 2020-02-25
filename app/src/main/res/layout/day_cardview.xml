@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/parent_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="100dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="25dp">
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date" />
+
+            <TextView
+                android:id="@+id/maxTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Max" />
+
+            <TextView
+                android:id="@+id/minTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Min" />
+
+            <TextView
+                android:id="@+id/hod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Best hunt @ 5pm" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/darker_gray" />
+    </LinearLayout>
+</RelativeLayout>

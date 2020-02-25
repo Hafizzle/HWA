@@ -2,6 +2,7 @@ package com.hafizzle.huntwiseapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -9,11 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.hafizzle.huntwiseapp.Adapters.RecyclerViewAdapter;
 import com.hafizzle.huntwiseapp.Fragments.BlackBearFragment;
 import com.hafizzle.huntwiseapp.Fragments.BlacktailDeerFragment;
 import com.hafizzle.huntwiseapp.Fragments.CoyoteFragment;
@@ -29,12 +33,21 @@ import com.hafizzle.huntwiseapp.Fragments.WaterfowlFragment;
 import com.hafizzle.huntwiseapp.Fragments.WhitetailDeerFragment;
 import com.hafizzle.huntwiseapp.Fragments.WildBoarFragment;
 import com.hafizzle.huntwiseapp.R;
+import com.kwabenaberko.openweathermaplib.constants.Units;
+import com.kwabenaberko.openweathermaplib.implementation.OpenWeatherMapHelper;
+import com.kwabenaberko.openweathermaplib.implementation.callbacks.ThreeHourForecastCallback;
+import com.kwabenaberko.openweathermaplib.models.threehourforecast.ThreeHourForecast;
+
+import java.util.ArrayList;
 
 public class HuntCast extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private AppBarLayout appBarLayout;
     private ViewPager viewPager;
+    private ArrayList<String> mDates = new ArrayList<>();
+    private ArrayList<String> mMinTemps = new ArrayList<>();
+    private ArrayList<String> mMaxTemps = new ArrayList<>();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -100,5 +113,49 @@ public class HuntCast extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
 
+        //OpenWeatherMap
+        OpenWeatherMapHelper helper = new OpenWeatherMapHelper(getString(R.string.OPEN_WEATHER_MAP_API_KEY));
+        helper.setUnits(Units.IMPERIAL);
+
+        helper.getThreeHourForecastByGeoCoordinates(41.520557,-88.150558, new ThreeHourForecastCallback() {
+            @Override
+            public void onSuccess(ThreeHourForecast threeHourForecast) {
+
+                getForecasts(threeHourForecast);
+                initRecyclerView();
+
+                Log.v("TAG", "City/Country: "+ threeHourForecast.getCity().getName() + "/" + threeHourForecast.getCity().getCountry() +"\n"
+                        +"Forecast Array Count: " + threeHourForecast.getCnt() +"\n"
+                        //For this example, we are logging details of only the first forecast object in the forecasts array
+                        +"First Forecast Date Timestamp: " + threeHourForecast.getList().get(0).getDt() +"\n"
+                        +"First Forecast Weather Description: " + threeHourForecast.getList().get(0).getWeatherArray().get(0).getDescription()+ "\n"
+                        +"First Forecast Min Temperature: " + threeHourForecast.getList().get(0).getMain().getTempMin()+"\n"
+                        +"First Forecast Max Temperature: " + threeHourForecast.getList().get(0).getMain().getTempMax()+"\n"
+                        +"First Forecast Wind Speed: " + threeHourForecast.getList().get(0).getWind().getSpeed() + "\n"
+                );
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+                Log.v("TAG", throwable.getMessage());
+            }
+        });
+
+
+    }
+
+    public void getForecasts(ThreeHourForecast threeHourForecast){
+        for (int i=0;i<=8;i++){
+            mDates.add(threeHourForecast.getList().get(i).getDt().toString());
+            mMinTemps.add(String.valueOf(threeHourForecast.getList().get(i).getMain().getTempMin()));
+            mMaxTemps.add(String.valueOf(threeHourForecast.getList().get(0).getMain().getTempMax()));
+        }
+    }
+
+    public void initRecyclerView(){
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, mDates, mMinTemps, mMaxTemps);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }
