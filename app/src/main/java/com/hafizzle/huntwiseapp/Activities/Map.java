@@ -166,7 +166,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
             case LOCATION_PERMISSION_REQUEST_CODE:{
                 if(grantResults.length > 0){
                 for(int i = 0; i < grantResults.length; i++){
-                    if(grantResults[i] == PackageManager.PERMISSION_GRANTED){
+                    if(grantResults[i] != PackageManager.PERMISSION_GRANTED){
                         mLocationPermissionsGranted = false;
                         return;
                     }
